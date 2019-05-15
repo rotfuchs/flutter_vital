@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_vital/gui/dashboard/charts/blood_pressure_line_chart.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:flutter_vital/gui/dashboard/dashboard.dart';
 
 void main() => runApp(MyApp());
 
@@ -9,19 +10,23 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
-//      theme: ThemeData(
-//        primarySwatch: Colors.blue,
-//      ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Dashboard'),
-        ),
-        body: Container(
-          padding: const EdgeInsets.all(8),
-          child: BloodPressureLineChart(_createSampleData()),
-          height: 400,
-        )
-      ) //MyHomePage(title: 'Flutter Demo Home Page'),
+
+      home: Dashboard(),
+
+      theme: ThemeData.dark()
+
+
+//      home: Scaffold(
+//        appBar: AppBar(
+//          title: Text('Dashboard'),
+//        ),
+//        body: Container(
+//          padding: const EdgeInsets.all(8),
+//          child: BloodPressureLineChart(_createSampleData()),
+//          height: 400,
+//        )
+
+//      ) //MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 
