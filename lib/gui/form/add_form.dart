@@ -25,7 +25,7 @@ class AddFormState extends State<AddForm> {
           leading: IconButton(icon: Icon(Icons.menu), onPressed: () => null,),
         ),
         body: ListView(
-          padding: EdgeInsets.fromLTRB(10, 20, 10, 0),
+          padding: EdgeInsets.fromLTRB(20, 25, 20, 0),
           children: <Widget>[
             Form(
               key: _formKey,
@@ -34,7 +34,7 @@ class AddFormState extends State<AddForm> {
               children: <Widget>[
 
                   Padding(
-                    padding: EdgeInsets.fromLTRB(0, 0, 0, 5),
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
                     child: Text('blood pressure values', style: TextStyle(fontSize: 20),),
                   ),
 
@@ -96,7 +96,7 @@ class AddFormState extends State<AddForm> {
 
                   Container(
                     alignment: Alignment.centerRight,
-                    padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
+                    padding: EdgeInsets.fromLTRB(0, 25, 0, 0),
                     child: RaisedButton(
                       onPressed: () {
                         // Validate will return true if the form is valid, or false if

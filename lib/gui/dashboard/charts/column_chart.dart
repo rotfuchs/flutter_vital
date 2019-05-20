@@ -24,10 +24,10 @@ class ColumnChart extends StatefulWidget {
       new OrdinalSales('2011', 3200),
       new OrdinalSales('2012', 4500),
       new OrdinalSales('2013', 4400),
-      new OrdinalSales('2014', 5000),
-      new OrdinalSales('2015', 5000),
-      new OrdinalSales('2016', 4500),
-      new OrdinalSales('2017', 4300),
+//      new OrdinalSales('2014', 5000),
+//      new OrdinalSales('2015', 5000),
+//      new OrdinalSales('2016', 4500),
+//      new OrdinalSales('2017', 4300),
     ];
 
     return [
@@ -56,14 +56,16 @@ class ColumnChartState extends State<ColumnChart> {
           renderSpec: new charts.NoneRenderSpec()
       ),
       domainAxis: new charts.OrdinalAxisSpec(
-          showAxisLine: true,
+          showAxisLine: false,
           renderSpec: new charts.NoneRenderSpec()
       ),
+
       layoutConfig: new charts.LayoutConfig(
           leftMarginSpec: new charts.MarginSpec.fixedPixel(0),
           topMarginSpec: new charts.MarginSpec.fixedPixel(0),
           rightMarginSpec: new charts.MarginSpec.fixedPixel(0),
-          bottomMarginSpec: new charts.MarginSpec.fixedPixel(0)),
+          bottomMarginSpec: new charts.MarginSpec.fixedPixel(0)
+        ),
       );
   }
 }

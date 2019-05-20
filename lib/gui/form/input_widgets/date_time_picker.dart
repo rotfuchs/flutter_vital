@@ -52,7 +52,7 @@ class DateTimePicker extends StatelessWidget {
           flex: 4,
           child: InputDropdown(
             labelText: labelText,
-            valueText: DateFormat.yMMMd(myLocale.countryCode).format(selectedDate),
+            valueText: DateFormat.yMMMd(myLocale.languageCode).format(selectedDate),
             valueStyle: valueStyle,
             onPressed: () { _selectDate(context); },
           ),
