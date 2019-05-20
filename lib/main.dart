@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_vital/gui/dashboard/charts/blood_pressure_line_chart.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter_vital/gui/form/add_form.dart';
+import 'package:flutter_vital/gui/list/edit_list.dart';
 
 void main() => runApp(MyApp());
 
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
         const Locale('de'),
       ],
 
-      home: AddForm(),
+      home: EditList(),
 
       theme: ThemeData.dark()
 
