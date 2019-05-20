@@ -94,7 +94,8 @@ class AddFormState extends State<AddForm> {
                     },
                   ),
 
-                  Padding(
+                  Container(
+                    alignment: Alignment.centerRight,
                     padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
                     child: RaisedButton(
                       onPressed: () {
