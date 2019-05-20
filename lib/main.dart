@@ -1,17 +1,29 @@
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vital/gui/dashboard/charts/blood_pressure_line_chart.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
-import 'package:flutter_vital/gui/dashboard/dashboard.dart';
+import 'package:flutter_vital/gui/form/add_form.dart';
 
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       title: 'Flutter Demo',
 
-      home: Dashboard(),
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+
+      supportedLocales: [
+        const Locale('en'),
+        const Locale('de'),
+      ],
+
+      home: AddForm(),
 
       theme: ThemeData.dark()
 
