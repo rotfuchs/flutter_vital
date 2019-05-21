@@ -15,10 +15,8 @@ class DashboardState extends State<Dashboard> {
       appBar: AppBar(
         title: Text('Dashboard'),
         actions: <Widget>[
-          IconButton(icon: Icon(Icons.search), onPressed: () => null,),
           IconButton(icon: Icon(Icons.more_vert), onPressed: () => null,)
         ],
-        leading: IconButton(icon: Icon(Icons.menu), onPressed: () => null,),
       ),
       body: Container(
         child: ListView(
@@ -94,7 +92,13 @@ class DashboardState extends State<Dashboard> {
             )
           ],
         )
-      )
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.pushNamed(context, '/add');
+        },
+        child: Icon(Icons.add),
+      ),
     );
   }
 }

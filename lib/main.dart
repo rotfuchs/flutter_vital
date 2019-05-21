@@ -2,6 +2,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vital/gui/dashboard/charts/blood_pressure_line_chart.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:flutter_vital/gui/dashboard/dashboard.dart';
 import 'package:flutter_vital/gui/form/add_form.dart';
 import 'package:flutter_vital/gui/list/edit_list.dart';
 
@@ -24,7 +25,18 @@ class MyApp extends StatelessWidget {
         const Locale('de'),
       ],
 
-      home: EditList(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => Dashboard(),
+        '/add': (context) => AddForm(),
+        '/list': (context) => EditList(),
+      },
+
+//      home: PageView(
+//        children: <Widget>[
+//          Dashboard(),
+//        ],
+//      ),
 
       theme: ThemeData.dark()
 

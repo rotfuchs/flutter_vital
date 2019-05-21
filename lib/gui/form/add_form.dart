@@ -19,10 +19,27 @@ class AddFormState extends State<AddForm> {
         appBar: AppBar(
           title: Text('Add form'),
           actions: <Widget>[
-            IconButton(icon: Icon(Icons.search), onPressed: () => null,),
-            IconButton(icon: Icon(Icons.more_vert), onPressed: () => null,)
+            PopupMenuButton(
+              icon: Icon(Icons.more_vert),
+              onSelected: (selectedDropDownItem) => handlePopUpChanged(selectedDropDownItem),
+              itemBuilder: (BuildContext context) {
+                return [
+                  PopupMenuItem(child: Text('Edit entries'), value: 'edit_list',),
+                  PopupMenuItem(child: Text('Settings'), value: 'settings',),
+                  PopupMenuItem(child: Text('About'), value: 'about',),
+                ];
+              },
+            )
+//            IconButton(
+//              icon: Icon(Icons.more_vert),
+//              onPressed: () => {
+////                  return DropdownMenuItem<String>(
+////                  value: value,
+////                  child: Text(value),
+////                );
+//              },
+//            ),
           ],
-          leading: IconButton(icon: Icon(Icons.menu), onPressed: () => null,),
         ),
         body: ListView(
           padding: EdgeInsets.fromLTRB(20, 25, 20, 0),
@@ -123,6 +140,16 @@ class AddFormState extends State<AddForm> {
           ]
         )
     );
+  }
+
+  void handlePopUpChanged(String value) {
+    setState(() {
+      switch(value) {
+        case 'edit_list':
+          Navigator.pushNamed(context, '/list');
+          break;
+      }
+    });
   }
 }
 
