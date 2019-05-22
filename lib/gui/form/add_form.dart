@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_vital/gui/form/input_widgets/date_time_picker.dart';
+import 'package:flutter_vital/gui/localization.dart';
 import 'package:flutter_vital/gui/navigation/appbar_popup_button.dart';
 
 class AddForm extends StatefulWidget {
@@ -18,7 +19,7 @@ class AddFormState extends State<AddForm> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Add form'),
+          title: Text(GuiLocalizations.of(context).trans('add_entry')),
           actions: <Widget>[
             AppbarPopupButton()
           ],
@@ -34,11 +35,14 @@ class AddFormState extends State<AddForm> {
 
                   Padding(
                     padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
-                    child: Text('blood pressure values', style: TextStyle(fontSize: 20),),
+                    child: Text(
+                      GuiLocalizations.of(context).trans('blood_pressure_values'),
+                      style: TextStyle(fontSize: 20),
+                    ),
                   ),
 
                   DateTimePicker(
-                    labelText: 'From',
+                    labelText: GuiLocalizations.of(context).trans('from'),
                     selectedDate: _fromDate,
                     selectedTime: _fromTime,
                     selectDate: (DateTime date) {
@@ -62,7 +66,7 @@ class AddFormState extends State<AddForm> {
                     ),
                     validator: (value) {
                       if (value.isEmpty || !isNumeric(value)) {
-                        return 'Please enter a numeric value';
+                        return GuiLocalizations.of(context).trans('please_enter_numeric_value');
                       }
                     },
                   ),
@@ -75,7 +79,7 @@ class AddFormState extends State<AddForm> {
                     ),
                     validator: (value) {
                       if (value.isEmpty || !isNumeric(value)) {
-                        return 'Please enter a numeric value';
+                        return GuiLocalizations.of(context).trans('please_enter_numeric_value');
                       }
                     },
                   ),
@@ -88,7 +92,7 @@ class AddFormState extends State<AddForm> {
                     ),
                     validator: (value) {
                       if (value.isEmpty || !isNumeric(value)) {
-                        return 'Please enter a numeric value';
+                        return GuiLocalizations.of(context).trans('please_enter_numeric_value');
                       }
                     },
                   ),
@@ -106,7 +110,9 @@ class AddFormState extends State<AddForm> {
 //                            .showSnackBar(SnackBar(content: Text('Processing Data')));
                         }
                       },
-                      child: Text('Save'),
+                      child: Text(
+                        GuiLocalizations.of(context).trans('save')
+                      ),
                     ),
                   )
                 ],

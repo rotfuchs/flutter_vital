@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_vital/gui/localization.dart';
 
 class AppbarPopupButton extends StatelessWidget {
 
@@ -18,9 +19,9 @@ class AppbarPopupButton extends StatelessWidget {
       onSelected: (selectedDropDownItem) => handlePopUpChanged(selectedDropDownItem),
       itemBuilder: (BuildContext context) {
         return [
-          PopupMenuItem(child: Text('Edit entries'), value: 'edit_list',),
-          PopupMenuItem(child: Text('Settings'), value: 'settings',),
-          PopupMenuItem(child: Text('About'), value: 'about',),
+          PopupMenuItem(child: Text(GuiLocalizations.of(context).trans('edit_entries')), value: 'edit_list',),
+          PopupMenuItem(child: Text(GuiLocalizations.of(context).trans('settings')), value: 'settings',),
+          PopupMenuItem(child: Text(GuiLocalizations.of(context).trans('about')), value: 'about',),
         ];
       },
     );

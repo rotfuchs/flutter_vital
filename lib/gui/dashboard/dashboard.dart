@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_vital/gui/dashboard/charts/column_chart.dart';
 import 'package:flutter_vital/gui/dashboard/charts/line_chart.dart';
+import 'package:flutter_vital/gui/localization.dart';
 import 'package:flutter_vital/gui/navigation/appbar_popup_button.dart';
 
 class Dashboard extends StatefulWidget {
@@ -14,7 +15,7 @@ class DashboardState extends State<Dashboard> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Dashboard'),
+        title: Text(GuiLocalizations.of(context).trans('dashboard')),
         actions: <Widget>[
           AppbarPopupButton()
         ],
@@ -25,7 +26,7 @@ class DashboardState extends State<Dashboard> {
             Container(
               padding: new EdgeInsets.fromLTRB(12, 12, 0, 6),
               child: Text(
-                'Die letzten 7 Tage',
+                GuiLocalizations.of(context).trans('dashboard_title'),
                 style: TextStyle(
                     fontSize: 16
                 ),

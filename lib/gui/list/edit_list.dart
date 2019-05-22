@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_vital/gui/localization.dart';
 import 'package:flutter_vital/gui/navigation/appbar_popup_button.dart';
 
 class EditList extends StatefulWidget {
@@ -19,7 +20,7 @@ class EditListState extends State<EditList> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('readings'),
+        title: Text(GuiLocalizations.of(context).trans('edit_entries')),
         actions: <Widget>[AppbarPopupButton()],
       ),
       body: ListView.separated(

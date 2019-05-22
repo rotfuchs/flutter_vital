@@ -1,10 +1,9 @@
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_vital/gui/dashboard/charts/blood_pressure_line_chart.dart';
-import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter_vital/gui/dashboard/dashboard.dart';
 import 'package:flutter_vital/gui/form/add_form.dart';
 import 'package:flutter_vital/gui/list/edit_list.dart';
+import 'package:flutter_vital/gui/localization.dart';
 
 void main() => runApp(MyApp());
 
@@ -16,6 +15,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
 
       localizationsDelegates: [
+        const GuiLocalizationsDelegate(),
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
       ],
@@ -55,25 +55,25 @@ class MyApp extends StatelessWidget {
     );
   }
 
-  static List<charts.Series<PulseValue, DateTime>> _createSampleData() {
-    final data = [
-      new PulseValue(new DateTime(2017, 9, 19), 5),
-      new PulseValue(new DateTime(2017, 9, 26), 25),
-      new PulseValue(new DateTime(2017, 10, 3), 100),
-      new PulseValue(new DateTime(2017, 10, 10), 75),
-    ];
-
-    return [
-      new charts.Series<PulseValue, DateTime>(
-        id: 'Pulse',
-        colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
-        domainFn: (PulseValue pulse, _) => pulse.recordingDate,
-        measureFn: (PulseValue pulse, _) => pulse.pulse,
-        data: data,
-        labelAccessorFn: (PulseValue row, _) => '${row.pulse}',
-      )
-    ];
-  }
+//  static List<charts.Series<PulseValue, DateTime>> _createSampleData() {
+//    final data = [
+//      new PulseValue(new DateTime(2017, 9, 19), 5),
+//      new PulseValue(new DateTime(2017, 9, 26), 25),
+//      new PulseValue(new DateTime(2017, 10, 3), 100),
+//      new PulseValue(new DateTime(2017, 10, 10), 75),
+//    ];
+//
+//    return [
+//      new charts.Series<PulseValue, DateTime>(
+//        id: 'Pulse',
+//        colorFn: (_, __) => charts.MaterialPalette.blue.shadeDefault,
+//        domainFn: (PulseValue pulse, _) => pulse.recordingDate,
+//        measureFn: (PulseValue pulse, _) => pulse.pulse,
+//        data: data,
+//        labelAccessorFn: (PulseValue row, _) => '${row.pulse}',
+//      )
+//    ];
+//  }
 }
 
 class MyHomePage extends StatefulWidget {
