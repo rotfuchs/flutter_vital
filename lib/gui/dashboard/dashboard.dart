@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_vital/gui/dashboard/charts/column_chart.dart';
 import 'package:flutter_vital/gui/dashboard/charts/line_chart.dart';
+import 'package:flutter_vital/gui/navigation/appbar_popup_button.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -15,7 +16,7 @@ class DashboardState extends State<Dashboard> {
       appBar: AppBar(
         title: Text('Dashboard'),
         actions: <Widget>[
-          IconButton(icon: Icon(Icons.more_vert), onPressed: () => null,)
+          AppbarPopupButton()
         ],
       ),
       body: Container(
@@ -46,16 +47,18 @@ class DashboardState extends State<Dashboard> {
                         )
                       ),
                       DashboardRatioCard('Puls', 55.5, 'Bla bla bla bla'),
-                      Card(
-                        child: new Padding(
-                          padding: new EdgeInsets.all(22.0),
-                          child: new SizedBox(
-                            height: 100.0,
-                            child: VitalLineChart.withSampleData(),
-                          ),
-                        )
-                      ),
-                      DashboardCard(VitalLineChart.withSampleData()),
+
+//                      Card(
+//                        child: new Padding(
+//                          padding: new EdgeInsets.all(22.0),
+//                          child: new SizedBox(
+//                            height: 100.0,
+//                            child: VitalLineChart.withSampleData(),
+//                          ),
+//                        )
+//                      ),
+
+//                      DashboardCard(VitalLineChart.withSampleData()),
                     ],
                   ),
                 ),

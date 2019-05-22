@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_vital/gui/navigation/appbar_popup_button.dart';
 
 class EditList extends StatefulWidget {
   EditList({Key key}) : super(key: key);
@@ -19,6 +20,7 @@ class EditListState extends State<EditList> {
     return Scaffold(
       appBar: AppBar(
         title: Text('readings'),
+        actions: <Widget>[AppbarPopupButton()],
       ),
       body: ListView.separated(
         itemCount: items.length,

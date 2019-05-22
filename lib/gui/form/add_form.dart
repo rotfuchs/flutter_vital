@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_vital/gui/form/input_widgets/date_time_picker.dart';
+import 'package:flutter_vital/gui/navigation/appbar_popup_button.dart';
 
 class AddForm extends StatefulWidget {
   @override
@@ -19,26 +20,7 @@ class AddFormState extends State<AddForm> {
         appBar: AppBar(
           title: Text('Add form'),
           actions: <Widget>[
-            PopupMenuButton(
-              icon: Icon(Icons.more_vert),
-              onSelected: (selectedDropDownItem) => handlePopUpChanged(selectedDropDownItem),
-              itemBuilder: (BuildContext context) {
-                return [
-                  PopupMenuItem(child: Text('Edit entries'), value: 'edit_list',),
-                  PopupMenuItem(child: Text('Settings'), value: 'settings',),
-                  PopupMenuItem(child: Text('About'), value: 'about',),
-                ];
-              },
-            )
-//            IconButton(
-//              icon: Icon(Icons.more_vert),
-//              onPressed: () => {
-////                  return DropdownMenuItem<String>(
-////                  value: value,
-////                  child: Text(value),
-////                );
-//              },
-//            ),
+            AppbarPopupButton()
           ],
         ),
         body: ListView(
@@ -127,13 +109,6 @@ class AddFormState extends State<AddForm> {
                       child: Text('Save'),
                     ),
                   )
-
-
-
-
-
-
-
                 ],
               )
             )
@@ -142,15 +117,7 @@ class AddFormState extends State<AddForm> {
     );
   }
 
-  void handlePopUpChanged(String value) {
-    setState(() {
-      switch(value) {
-        case 'edit_list':
-          Navigator.pushNamed(context, '/list');
-          break;
-      }
-    });
-  }
+
 }
 
 bool isNumeric(String s) {
