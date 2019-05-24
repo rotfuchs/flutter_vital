@@ -1,5 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:flutter_vital/gui/themes/dark_blue.dart';
 
 class ColumnChart extends StatefulWidget {
   final List<charts.Series> seriesList;
@@ -36,6 +38,7 @@ class ColumnChart extends StatefulWidget {
         domainFn: (OrdinalSales sales, _) => sales.year,
         measureFn: (OrdinalSales sales, _) => sales.sales,
         data: globalSalesData,
+//        colorFn: (OrdinalSales sales, _) => charts.Color(), //charts.MaterialPalette.red.shadeDefault,
       ),
     ];
   }

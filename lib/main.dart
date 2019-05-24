@@ -4,6 +4,7 @@ import 'package:flutter_vital/gui/dashboard/dashboard.dart';
 import 'package:flutter_vital/gui/form/add_form.dart';
 import 'package:flutter_vital/gui/list/edit_list.dart';
 import 'package:flutter_vital/gui/localization.dart';
+import 'package:flutter_vital/gui/themes/dark_blue.dart';
 
 void main() => runApp(MyApp());
 
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
 //        ],
 //      ),
 
-      theme: ThemeData.dark()
+      theme: darkBlueTheme,
 
 
 //      home: Scaffold(
