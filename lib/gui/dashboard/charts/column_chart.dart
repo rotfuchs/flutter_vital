@@ -38,7 +38,7 @@ class ColumnChart extends StatefulWidget {
         domainFn: (OrdinalSales sales, _) => sales.year,
         measureFn: (OrdinalSales sales, _) => sales.sales,
         data: globalSalesData,
-//        colorFn: (OrdinalSales sales, _) => charts.Color(), //charts.MaterialPalette.red.shadeDefault,
+        colorFn: (OrdinalSales sales, _) => getChartColor(DarkBlueThemeColors.purple[300]),
       ),
     ];
   }
@@ -78,4 +78,12 @@ class OrdinalSales {
   final int sales;
 
   OrdinalSales(this.year, this.sales);
+}
+
+charts.Color getChartColor(Color color) {
+  return charts.Color(
+      r: color.red,
+      g: color.green,
+      b: color.blue,
+      a: color.alpha);
 }
