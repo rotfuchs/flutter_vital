@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_vital/core/Database/SQLite/SQLiteDb.dart';
+import 'package:flutter_vital/core/Service/BloodPressure/Command/BloodPressureCommandService.dart';
+import 'package:flutter_vital/core/Service/BloodPressure/Model/BloodPressure.dart';
 import 'package:flutter_vital/gui/form/input_widgets/date_time_picker.dart';
 import 'package:flutter_vital/gui/localization.dart';
 import 'package:flutter_vital/gui/navigation/appbar_popup_button.dart';
@@ -15,9 +16,13 @@ class AddFormState extends State<AddForm> {
   final _formKey = GlobalKey<FormState>();
   DateTime _fromDate = DateTime.now();
   TimeOfDay _fromTime = TimeOfDay.now();
+  BloodPressure _bp = new BloodPressure();
 
   @override
   Widget build(BuildContext context) {
+    _bp.created = _fromDate;
+    _bp.created.add(new Duration(hours: _fromTime.hour, minutes: _fromTime.minute, seconds: 0));
+
     return Scaffold(
         appBar: AppBar(
           title: Text(GuiLocalizations.of(context).trans('add_entry')),
@@ -49,11 +54,14 @@ class AddFormState extends State<AddForm> {
                     selectDate: (DateTime date) {
                       setState(() {
                         _fromDate = date;
+                        _bp.created = date;
+                        _bp.created.add(new Duration(hours: _fromTime.hour, minutes: _fromTime.minute));
                       });
                     },
                     selectTime: (TimeOfDay time) {
                       setState(() {
                         _fromTime = time;
+                        _bp.created.add(new Duration(hours: _fromTime.hour, minutes: _fromTime.minute));
                       });
                     },
                   ),
@@ -70,6 +78,9 @@ class AddFormState extends State<AddForm> {
                         return GuiLocalizations.of(context).trans('please_enter_numeric_value');
                       }
                     },
+                    onSaved: (String value) {
+                      _bp.systolic = double.parse(value);
+                    },
                   ),
                   TextFormField(
                     keyboardType: TextInputType.number,
@@ -82,6 +93,9 @@ class AddFormState extends State<AddForm> {
                       if (value.isEmpty || !isNumeric(value)) {
                         return GuiLocalizations.of(context).trans('please_enter_numeric_value');
                       }
+                    },
+                    onSaved: (String value) {
+                      _bp.diastolic = double.parse(value);
                     },
                   ),
                   TextFormField(
@@ -96,6 +110,9 @@ class AddFormState extends State<AddForm> {
                         return GuiLocalizations.of(context).trans('please_enter_numeric_value');
                       }
                     },
+                    onSaved: (String value) {
+                      _bp.pulse = double.parse(value);
+                    },
                   ),
 
                   Container(
@@ -103,14 +120,17 @@ class AddFormState extends State<AddForm> {
                     padding: EdgeInsets.fromLTRB(0, 25, 0, 0),
                     child: RaisedButton(
                       onPressed: () {
-                        // Validate will return true if the form is valid, or false if
-                        // the form is invalid.
                         if (_formKey.currentState.validate()) {
+                          _formKey.currentState.save();
+                          print(_bp.toMap());
 
-//                          var test = new DatabaseConnection();
-//                          test.createDatabase().then((value) {
-//
-//                          });
+                          var bloodPressureCommandService = new BloodPressureCommandService();
+
+                          bloodPressureCommandService.save(_bp).then((success) {
+                            print(success);
+                            print(_bp.toMap());
+                          });
+
 //                        // If the form is valid, we want to show a Snackbar
 //                        Scaffold.of(context)
 //                            .showSnackBar(SnackBar(content: Text('Processing Data')));
