@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_vital/core/Database/SQLite/SQLiteDb.dart';
 import 'package:flutter_vital/gui/form/input_widgets/date_time_picker.dart';
 import 'package:flutter_vital/gui/localization.dart';
 import 'package:flutter_vital/gui/navigation/appbar_popup_button.dart';
@@ -105,6 +106,11 @@ class AddFormState extends State<AddForm> {
                         // Validate will return true if the form is valid, or false if
                         // the form is invalid.
                         if (_formKey.currentState.validate()) {
+
+//                          var test = new DatabaseConnection();
+//                          test.createDatabase().then((value) {
+//
+//                          });
 //                        // If the form is valid, we want to show a Snackbar
 //                        Scaffold.of(context)
 //                            .showSnackBar(SnackBar(content: Text('Processing Data')));
