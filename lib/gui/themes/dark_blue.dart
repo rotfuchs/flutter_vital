@@ -9,6 +9,7 @@ final ThemeData darkBlueTheme = new ThemeData(
   floatingActionButtonTheme: FloatingActionButtonThemeData(
     backgroundColor: DarkBlueThemeColors.purple[200]
   ),
+  toggleableActiveColor: DarkBlueThemeColors.purple[400],
 );
 
 class DarkBlueThemeColors {
