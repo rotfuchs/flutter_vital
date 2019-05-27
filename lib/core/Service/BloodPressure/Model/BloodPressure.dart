@@ -1,9 +1,19 @@
 
 class BloodPressure {
+  int id;
   DateTime created;
   double pulse;
   double diastolic;
   double systolic;
 
-  BloodPressure({this.created, this.pulse, this.diastolic, this.systolic});
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'created': created,
+      'pulse': pulse,
+      'diastolic': diastolic,
+      'systolic': systolic,
+    };
+  }
+
 }

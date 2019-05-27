@@ -1,8 +1,7 @@
 
 
 class BloodPressureFilter {
-  String orderField = "created";
-  String oderSort = "DESC";
+  String orderBy = "created DESC";
 
   int limit;
   int offset;

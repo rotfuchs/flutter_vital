@@ -8,4 +8,8 @@ class BloodPressureQueryService {
   Future<List<BloodPressure>> filter(BloodPressureFilter filter) async {
     return _repository.filter(filter);
   }
+
+  Future<BloodPressure> getSingle(int id) async {
+    return _repository.getSingle(id);
+  }
 }
