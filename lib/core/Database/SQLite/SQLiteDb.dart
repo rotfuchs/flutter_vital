@@ -1,4 +1,6 @@
 import 'dart:async';
+
+import 'package:flutter_vital/config.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -10,17 +12,20 @@ class SQLiteDb {
 
   initDB() async {
     return await openDatabase(
-      // Set the path to the database.
-      join(await getDatabasesPath(), 'doggie_database.db'),
-      // When the database is first created, create a table to store dogs
+      join(await getDatabasesPath(), sqLiteDatabaseName),
       onCreate: (db, version) {
-        // Run the CREATE TABLE statement on the database
         return db.execute(
-          "CREATE TABLE dogs(id INTEGER PRIMARY KEY, name TEXT, age INTEGER)",
+          "CREATE TABLE blood_pressure_data(" +
+              "id INTEGER "+
+              "constraint blood_pressure_data_pk "+
+              "primary key autoincrement, "+
+              "created DATETIME, "+
+              "pulse DOUBLE, "+
+              "diastolic DOUBLE, "+
+              "systolic DOUBLE "+
+          ");"
         );
       },
-      // Set the version. This executes the onCreate function and provides a
-      // path to perform database upgrades and downgrades.
       version: 1,
     );
   }
@@ -29,7 +34,6 @@ class SQLiteDb {
     if (_database != null)
       return _database;
 
-    // if _database is null we instantiate it
     _database = await initDB();
     return _database;
   }
