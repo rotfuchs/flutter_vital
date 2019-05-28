@@ -47,31 +47,14 @@ class EditListState extends State<EditList> {
 
   Widget createListView(BuildContext context, AsyncSnapshot snapshot) {
     List<BloodPressure> values = snapshot.data;
-    Locale _myLocale = Localizations.localeOf(context);
 
     return ListView.separated(
       itemCount: values.length,
       separatorBuilder: (BuildContext context, int index) => Divider(),
       itemBuilder: (context, index) {
         BloodPressure bp = values[index];
-        String title = DateFormat.yMMMd(_myLocale.languageCode).format(bp.created).toString();
 
-        return CheckboxListTile(
-          title: Text(title),
-          subtitle: Text("Puls: "+ bp.pulse.toString() +", Dia: "+ bp.diastolic.toString() +", Sys: "+ bp.systolic.toString(), style: TextStyle(fontSize: 16),),
-          value: (selectedItems.indexOf(index)>=0),
-          onChanged: (bool value) {
-            setState(() {
-              int selectedItemsIndex = selectedItems.indexOf(index);
-
-              if(value) {
-                selectedItems.add(index);
-              } else if(selectedItemsIndex>=0) {
-                selectedItems.removeAt(selectedItemsIndex);
-              }
-            });
-          },
-        );
+        return new EditListCheckboxTile(bp);
       },
     );
   }
@@ -79,5 +62,43 @@ class EditListState extends State<EditList> {
   Future<List<BloodPressure>> _getData() async {
     var filter = BloodPressureFilter();
     return bloodPressureQueryService.filter(filter);
+  }
+}
+
+class EditListCheckboxTile extends StatefulWidget {
+  final BloodPressure _bp;
+
+  EditListCheckboxTile(this._bp);
+
+  @override
+  EditListCheckboxTileState createState() {
+    return EditListCheckboxTileState(_bp);
+  }
+}
+
+class EditListCheckboxTileState extends State<EditListCheckboxTile> {
+  final BloodPressure _bp;
+  bool _checked = false;
+
+  EditListCheckboxTileState(this._bp);
+
+  @override
+  Widget build(BuildContext context) {
+    Locale _myLocale = Localizations.localeOf(context);
+    String title = DateFormat.yMMMd(_myLocale.languageCode).format(_bp.created).toString();
+
+    return CheckboxListTile(
+      title: Text(title),
+      subtitle: Text(
+        "Puls: "+ _bp.pulse.toString() +", Dia: "+ _bp.diastolic.toString() +", Sys: "+ _bp.systolic.toString(),
+        style: TextStyle(fontSize: 16),
+      ),
+      value: _checked,
+      onChanged: (bool value) {
+        setState(() {
+          _checked = (!_checked);
+        });
+      },
+    );
   }
 }
