@@ -5,9 +5,10 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_vital/core/Service/BloodPressure/Model/BloodPressure.dart';
 import 'package:flutter_vital/core/Service/BloodPressure/Query/BloodPressureQueryService.dart';
 import 'package:flutter_vital/core/Service/BloodPressure/Repository/Filter/BloodPressureFilter.dart';
+import 'package:flutter_vital/gui/list/widgets/checkbox_list_tile.dart';
+import 'package:flutter_vital/gui/list/widgets/trash_icon_button.dart';
 import 'package:flutter_vital/gui/localization.dart';
-import 'package:flutter_vital/gui/navigation/appbar_popup_button.dart';
-import 'package:intl/intl.dart';
+
 
 class EditList extends StatefulWidget {
   EditList({Key key}) : super(key: key);
@@ -20,16 +21,18 @@ class EditList extends StatefulWidget {
 
 class EditListState extends State<EditList> {
   final bloodPressureQueryService = new BloodPressureQueryService();
-  final List<int> selectedItems = List<int>();
+  final List<BloodPressure> selectedItems = List<BloodPressure>();
+  final StreamController<List<BloodPressure>> _controller =  new StreamController<List<BloodPressure>>();
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         title: Text(GuiLocalizations.of(context).trans('edit_entries')),
         actions: <Widget>[
-          TrashIcon(),
-          AppbarPopupButton()
+          TrashIcon(_controller.stream),
+//          AppbarPopupButton()
         ],
       ),
       body: new FutureBuilder(
@@ -57,9 +60,18 @@ class EditListState extends State<EditList> {
       itemCount: values.length,
       separatorBuilder: (BuildContext context, int index) => Divider(),
       itemBuilder: (context, index) {
-        BloodPressure bp = values[index];
+//        BloodPressure bp = values[index];
 
-        return new EditListCheckboxTile(bp);
+        return new EditListCheckboxTile(
+            bp:  values[index],
+            checkboxChanged: (BloodPressure bp, bool checked) {
+              if(checked) {
+                selectedItems.add(bp);
+              } else {
+                selectedItems.remove(bp);
+              }
+              _controller.add(selectedItems);
+            });
       },
     );
   }
@@ -68,87 +80,26 @@ class EditListState extends State<EditList> {
     var filter = BloodPressureFilter();
     return bloodPressureQueryService.filter(filter);
   }
-}
 
-final testController = StreamController<List<BloodPressure>>();
+  @override
+  void dispose() {
+    _controller.close();
+    super.dispose();
+  }
+}
 
 class TrashIconController {
   List<BloodPressure> items = List();
-  Stream<List<BloodPressure>> get bpItems => testController.stream;
 
   void add(BloodPressure bp) {
     items.add(bp);
-    testController.add(items);
+//    testController.add(items);
   }
 
   void remove(BloodPressure bp) {
     items.remove(bp);
-    testController.add(items);
-  }
-}
-
-class TrashIcon extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return new StreamBuilder(
-      stream: testController.stream,
-      builder: (context, shot) {
-
-        if(shot.hasData && shot.data.length>0) {
-          return Icon(Icons.delete);
-        }
-
-        return Container();
-      }
-    );
+//    testController.add(items);
   }
 }
 
 
-
-
-class EditListCheckboxTile extends StatefulWidget {
-  final BloodPressure _bp;
-
-  EditListCheckboxTile(this._bp);
-
-  @override
-  EditListCheckboxTileState createState() {
-    return EditListCheckboxTileState(_bp);
-  }
-}
-
-class EditListCheckboxTileState extends State<EditListCheckboxTile> {
-  final BloodPressure _bp;
-  bool _checked = false;
-
-  EditListCheckboxTileState(this._bp);
-
-  @override
-  Widget build(BuildContext context) {
-    Locale _myLocale = Localizations.localeOf(context);
-    String title = DateFormat.yMMMd(_myLocale.languageCode).format(_bp.created).toString();
-
-
-    return CheckboxListTile(
-      title: Text(title),
-      subtitle: Text(
-        "Puls: "+ _bp.pulse.toString() +", Dia: "+ _bp.diastolic.toString() +", Sys: "+ _bp.systolic.toString(),
-        style: TextStyle(fontSize: 16),
-      ),
-      value: _checked,
-      onChanged: (bool value) {
-        setState(() {
-          _checked = (!_checked);
-
-          var controller = TrashIconController();
-          if(_checked) {
-            controller.add(_bp);
-          } else {
-            controller.remove(_bp);
-          }
-        });
-      },
-    );
-  }
-}
