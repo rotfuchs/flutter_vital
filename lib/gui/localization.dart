@@ -23,6 +23,7 @@ class GuiLocalizations {
       'from': 'From',
       'about': 'About',
       'save': 'Save',
+      'saved_values_successfull': 'Saved values successfull!'
     },
     'de': {
       'title': 'Hola Mundo',
@@ -36,6 +37,7 @@ class GuiLocalizations {
       'from': 'Von',
       'about': 'Info',
       'save': 'Speichern',
+      'saved_values_successfull': 'Die Werte wurden erfolgreich gespeichert!'
     },
   };
 
