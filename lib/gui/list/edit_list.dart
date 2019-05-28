@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_vital/core/Service/BloodPressure/Model/BloodPressure.dart';
@@ -25,7 +27,10 @@ class EditListState extends State<EditList> {
     return Scaffold(
       appBar: AppBar(
         title: Text(GuiLocalizations.of(context).trans('edit_entries')),
-        actions: <Widget>[AppbarPopupButton()],
+        actions: <Widget>[
+          TrashIcon(),
+          AppbarPopupButton()
+        ],
       ),
       body: new FutureBuilder(
         future: _getData(),
@@ -65,6 +70,43 @@ class EditListState extends State<EditList> {
   }
 }
 
+final testController = StreamController<List<BloodPressure>>();
+
+class TrashIconController {
+  List<BloodPressure> items = List();
+  Stream<List<BloodPressure>> get bpItems => testController.stream;
+
+  void add(BloodPressure bp) {
+    items.add(bp);
+    testController.add(items);
+  }
+
+  void remove(BloodPressure bp) {
+    items.remove(bp);
+    testController.add(items);
+  }
+}
+
+class TrashIcon extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return new StreamBuilder(
+      stream: testController.stream,
+      builder: (context, shot) {
+
+        if(shot.hasData && shot.data.length>0) {
+          return Icon(Icons.delete);
+        }
+
+        return Container();
+      }
+    );
+  }
+}
+
+
+
+
 class EditListCheckboxTile extends StatefulWidget {
   final BloodPressure _bp;
 
@@ -87,6 +129,7 @@ class EditListCheckboxTileState extends State<EditListCheckboxTile> {
     Locale _myLocale = Localizations.localeOf(context);
     String title = DateFormat.yMMMd(_myLocale.languageCode).format(_bp.created).toString();
 
+
     return CheckboxListTile(
       title: Text(title),
       subtitle: Text(
@@ -97,6 +140,13 @@ class EditListCheckboxTileState extends State<EditListCheckboxTile> {
       onChanged: (bool value) {
         setState(() {
           _checked = (!_checked);
+
+          var controller = TrashIconController();
+          if(_checked) {
+            controller.add(_bp);
+          } else {
+            controller.remove(_bp);
+          }
         });
       },
     );
