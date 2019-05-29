@@ -32,7 +32,6 @@ class EditListState extends State<EditList> {
         title: Text(GuiLocalizations.of(context).trans('edit_entries')),
         actions: <Widget>[
           TrashIcon(_controller.stream),
-//          AppbarPopupButton()
         ],
       ),
       body: new FutureBuilder(
@@ -41,7 +40,9 @@ class EditListState extends State<EditList> {
         switch (snapshot.connectionState) {
           case ConnectionState.none:
           case ConnectionState.waiting:
-           return new Text('loading...');
+            return new Center(
+              child: new CircularProgressIndicator(),
+            );
           default:
             if (snapshot.hasError)
               return new Text('Error: ${snapshot.error}');
@@ -54,13 +55,22 @@ class EditListState extends State<EditList> {
   }
 
   Widget createListView(BuildContext context, AsyncSnapshot snapshot) {
-    List<BloodPressure> values = snapshot.data;
+    List<BloodPressure> values = new List<BloodPressure>.from(snapshot.data);
+    int length = values.length*10;
 
     return ListView.separated(
-      itemCount: values.length,
+      itemCount: length,
       separatorBuilder: (BuildContext context, int index) => Divider(),
       itemBuilder: (context, index) {
-//        BloodPressure bp = values[index];
+
+        if((index+1)==values.length) {
+          print("hossa!");
+          snapshot.data.forEach((BloodPressure bp) {
+            values.add(bp);
+          });
+
+          length += values.length;
+        }
 
         return new EditListCheckboxTile(
             bp:  values[index],
@@ -87,19 +97,4 @@ class EditListState extends State<EditList> {
     super.dispose();
   }
 }
-
-class TrashIconController {
-  List<BloodPressure> items = List();
-
-  void add(BloodPressure bp) {
-    items.add(bp);
-//    testController.add(items);
-  }
-
-  void remove(BloodPressure bp) {
-    items.remove(bp);
-//    testController.add(items);
-  }
-}
-
 
