@@ -12,4 +12,8 @@ class BloodPressureQueryService {
   Future<BloodPressure> getSingle(int id) async {
     return _repository.getSingle(id);
   }
+
+  Future<int> count(BloodPressureFilter filter) async {
+    return _repository.count(filter);
+  }
 }

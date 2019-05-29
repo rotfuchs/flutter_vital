@@ -68,6 +68,14 @@ class BloodPressureRepository {
     });
   }
 
+  Future<int> count(BloodPressureFilter filter) async {
+    final db = await _getDb();
+
+    var res = await db.rawQuery("SELECT COUNT(*) as counter FROM blood_pressure_data");
+
+    return (res.isNotEmpty) ? res.first["counter"] : 0;
+  }
+
   Future<BloodPressure> getSingle(int id) async {
     final db = await _getDb();
 
