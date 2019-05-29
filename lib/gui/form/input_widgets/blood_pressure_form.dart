@@ -156,7 +156,7 @@ class BloodPressureFormState extends State<BloodPressureForm> {
               backgroundColor: DarkBlueThemeColors.snackBarBackgroundColor,
               content: Row(
                 children: <Widget>[
-                  Icon(Icons.check),
+                  Icon(Icons.check_circle),
                   Padding(
                     padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
                     child: Text(snackBarText, style: TextStyle(),),
