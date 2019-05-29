@@ -19,10 +19,10 @@ class SQLiteDb {
               "id INTEGER "+
               "constraint blood_pressure_data_pk "+
               "primary key autoincrement, "+
-              "created DATETIME, "+
-              "pulse DOUBLE, "+
-              "diastolic DOUBLE, "+
-              "systolic DOUBLE "+
+              "created DATETIME NOT NULL, "+
+              "pulse DOUBLE NOT NULL, "+
+              "diastolic DOUBLE NOT NULL, "+
+              "systolic DOUBLE NOT NULL"+
           ");"
         );
       },
