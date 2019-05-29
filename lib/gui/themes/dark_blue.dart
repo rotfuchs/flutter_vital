@@ -17,6 +17,7 @@ class DarkBlueThemeColors extends ThemeColors{
   static const backgroundColor = const Color(0xFF191919);
   static const primaryButtonBackgroundColor = 0xFFBD83F8;
   static const cardBackgroundColor = const Color(0xFF313131);
+  static const snackBarBackgroundColor = Colors.green;
 
   static const MaterialColor purple = const MaterialColor(
     _blackPrimaryValue,
