@@ -19,6 +19,7 @@ class EditList extends StatefulWidget {
 
 class EditListState extends State<EditList> {
   final StreamController<List<BloodPressure>> _controller =  new StreamController<List<BloodPressure>>();
+  final ValueNotifier<String> _notifier = ValueNotifier("");
 
   @override
   Widget build(BuildContext context) {
@@ -27,10 +28,10 @@ class EditListState extends State<EditList> {
       appBar: AppBar(
         title: Text(GuiLocalizations.of(context).trans('edit_entries')),
         actions: <Widget>[
-          TrashIcon(_controller.stream),
+          TrashIcon(_controller.stream, _notifier),
         ],
       ),
-      body: BloodPressureList(_controller),
+      body: BloodPressureList(_controller, _notifier),
     );
   }
 

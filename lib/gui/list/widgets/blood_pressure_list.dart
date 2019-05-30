@@ -10,27 +10,37 @@ import 'package:flutter_vital/gui/list/widgets/checkbox_list_tile.dart';
 
 class BloodPressureList extends StatefulWidget {
   final StreamController<List<BloodPressure>> _controller;
+  final ValueNotifier<String> _notifier;
 
-  BloodPressureList(this._controller);
+  BloodPressureList(this._controller, this._notifier);
 
   @override
   BloodPressureListState createState() {
-    return BloodPressureListState(this._controller);
+    return BloodPressureListState(this._controller, this._notifier);
   }
 }
 
 class BloodPressureListState extends State<BloodPressureList> {
   final bloodPressureQueryService = new BloodPressureQueryService();
   final List<BloodPressure> _allItems = new List<BloodPressure>();
-  final List<BloodPressure> selectedItems = List<BloodPressure>();
+  final List<BloodPressure> _selectedItems = List<BloodPressure>();
   final StreamController<List<BloodPressure>> _controller;
+  final ValueNotifier<String> _notifier;
   final int _limit = 100;
-  final int _offset = 0;
+  int _offset = 0;
 
-  BloodPressureListState(this._controller);
+  BloodPressureListState(this._controller, this._notifier);
 
   @override
   Widget build(BuildContext context) {
+
+    _notifier.addListener(() {
+      switch(_notifier.value) {
+        case 'items_deleted':
+          refresh();
+          break;
+      }
+    });
 
     return new FutureBuilder(
       future: _count(),
@@ -50,21 +60,10 @@ class BloodPressureListState extends State<BloodPressureList> {
   }
 
   Widget createListView(BuildContext context, AsyncSnapshot snapshot) {
-//    List<BloodPressure> bpItems = new List<BloodPressure>();
-
     return ListView.separated(
       itemCount: snapshot.data,
       separatorBuilder: (BuildContext context, int index) => Divider(),
       itemBuilder: (context, index) {
-
-//        if((index+1)==values.length) {
-//          print("hossa!");
-//          snapshot.data.forEach((BloodPressure bp) {
-//            values.add(bp);
-//          });
-//
-//          length += values.length;
-//        }
 
         if(_allItems.length<=(index+1)) {
           return _loadListItems(index);
@@ -89,6 +88,7 @@ class BloodPressureListState extends State<BloodPressureList> {
               return new Text('Error: ${snapshot.error}');
             } else {
               _allItems.addAll(snapshot.data);
+              _offset += _limit;
               return _buildListItem(_allItems[index]);
             }
         }
@@ -101,11 +101,11 @@ class BloodPressureListState extends State<BloodPressureList> {
         bp:  bp,
         checkboxChanged: (BloodPressure bpItem, bool checked) {
           if(checked) {
-            selectedItems.add(bpItem);
+            _selectedItems.add(bpItem);
           } else {
-            selectedItems.remove(bpItem);
+            _selectedItems.remove(bpItem);
           }
-          _controller.add(selectedItems);
+          _controller.add(_selectedItems);
         });
   }
 
@@ -126,5 +126,14 @@ class BloodPressureListState extends State<BloodPressureList> {
   Future<int> _count() async {
     var filter = BloodPressureFilter();
     return bloodPressureQueryService.count(filter);
+  }
+
+  void refresh() {
+    setState(() {
+      _offset = 0;
+      _allItems.clear();
+      _selectedItems.clear();
+      _controller.add(new List());
+    });
   }
 }
