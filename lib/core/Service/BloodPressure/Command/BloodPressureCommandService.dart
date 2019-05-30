@@ -13,15 +13,19 @@ class BloodPressureCommandService {
     return await _repository.delete(bp);
   }
 
-  Future<bool> deleteByFilter(BloodPressureFilter filter) async {
-    List<BloodPressure> items = await _repository.filter(filter);
-
+  Future<bool> deleteList(List<BloodPressure> items) async {
     for(final item in items) {
-      if(!await _repository.delete(item)) {
+      if (!await _repository.delete(item)) {
         return false;
       }
     }
 
     return true;
+  }
+
+  Future<bool> deleteByFilter(BloodPressureFilter filter) async {
+    List<BloodPressure> items = await _repository.filter(filter);
+
+    return this.deleteList(items);
   }
 }
