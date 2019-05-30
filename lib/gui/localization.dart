@@ -24,7 +24,12 @@ class GuiLocalizations {
       'about': 'About',
       'save': 'Save',
       'saved_values_successfull': 'Saved values successfull!',
-      'deleted_values_successfull': 'Deleted values successfull!'
+      'deleted_values_successfull': 'Deleted values successfull!',
+      'dark_purple_name': 'Dark purple theme',
+      'dark_blue_name': 'Dark blue theme',
+      'dark_red_name': 'Dark red theme',
+      'bright_blue_name': 'Bright blue theme',
+      'switch_theme': 'Switch theme',
     },
     'de': {
       'title': 'Hola Mundo',
@@ -39,7 +44,12 @@ class GuiLocalizations {
       'about': 'Info',
       'save': 'Speichern',
       'saved_values_successfull': 'Die Werte wurden erfolgreich gespeichert!',
-      'deleted_values_successfull': 'Die Werte wurden erfolgreich gelöscht'
+      'deleted_values_successfull': 'Die Werte wurden erfolgreich gelöscht',
+      'dark_purple_name': 'schwarz/lila',
+      'dark_blue_name': 'schwarz/blau',
+      'dark_red_name': 'schwarz/rot',
+      'bright_blue_name': 'weiß/blau',
+      'switch_theme': 'Theme wechseln',
     },
   };
 

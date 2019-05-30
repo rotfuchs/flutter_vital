@@ -6,7 +6,7 @@ import 'package:flutter_vital/core/Service/BloodPressure/Model/BloodPressure.dar
 import 'package:flutter_vital/gui/form/input_widgets/date_time_picker.dart';
 import 'package:flutter_vital/gui/form/input_widgets/form_text_field.dart';
 import 'package:flutter_vital/gui/localization.dart';
-import 'package:flutter_vital/gui/themes/dark_blue.dart';
+import 'package:flutter_vital/gui/theme_builder.dart';
 
 class BloodPressureForm extends StatefulWidget {
   @override
@@ -153,7 +153,7 @@ class BloodPressureFormState extends State<BloodPressureForm> {
           .of(context)
           .showSnackBar(
             SnackBar(
-              backgroundColor: DarkBlueThemeColors.snackBarBackgroundColor,
+              backgroundColor: AppTheme.getCurrentAppTheme().snackBarBgColor,
               content: Row(
                 children: <Widget>[
                   Icon(Icons.check_circle),

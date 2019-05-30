@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_vital/core/Service/BloodPressure/Command/BloodPressureCommandService.dart';
 import 'package:flutter_vital/core/Service/BloodPressure/Model/BloodPressure.dart';
 import 'package:flutter_vital/gui/localization.dart';
-import 'package:flutter_vital/gui/themes/dark_blue.dart';
+import 'package:flutter_vital/gui/theme_builder.dart';
 
 class TrashIcon extends StatelessWidget {
   final BloodPressureCommandService _bloodPressureCommandService = new BloodPressureCommandService();
@@ -48,7 +48,7 @@ class TrashIcon extends StatelessWidget {
           .of(context)
           .showSnackBar(
           SnackBar(
-              backgroundColor: DarkBlueThemeColors.snackBarBackgroundColor,
+              backgroundColor: AppTheme.getCurrentAppTheme().snackBarBgColor,
               content: Row(
                 children: <Widget>[
                   Icon(Icons.check_circle),

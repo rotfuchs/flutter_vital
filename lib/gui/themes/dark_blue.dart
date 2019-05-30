@@ -1,57 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_vital/gui/theme_builder.dart';
 
-final ThemeData darkBlueTheme = new ThemeData(
-  brightness: Brightness.dark,
-  primarySwatch: DarkBlueThemeColors.purple,
-  backgroundColor: DarkBlueThemeColors.backgroundColor,
-  scaffoldBackgroundColor: DarkBlueThemeColors.backgroundColor,
-  cardColor: DarkBlueThemeColors.cardBackgroundColor,
-  floatingActionButtonTheme: FloatingActionButtonThemeData(
-    backgroundColor: DarkBlueThemeColors.purple[200]
-  ),
-  toggleableActiveColor: DarkBlueThemeColors.purple[400],
-);
-
-class DarkBlueThemeColors extends ThemeColors{
-  static const _blackPrimaryValue = 0xFF000000;
+class DarkBlueTheme extends AppTheme {
+  static const blackPrimaryValue = 0xFF000000;
   static const backgroundColor = const Color(0xFF191919);
-  static const primaryButtonBackgroundColor = 0xFFBD83F8;
+  static const primaryButtonBackgroundColor = const Color(0xFF84b5fa); //200
   static const cardBackgroundColor = const Color(0xFF313131);
   static const snackBarBackgroundColor = Colors.green;
 
-  static const MaterialColor purple = const MaterialColor(
-    _blackPrimaryValue,
+  static const MaterialColor colors = const MaterialColor(
+    blackPrimaryValue,
     const <int, Color>{
-      50:  const Color(0xFFF2E6FD),
-      100: const Color(0xFFDDB0FC),
-      200: const Color(primaryButtonBackgroundColor),
-      300: const Color(0xFF9B5CFA),
-      400: const Color(0xFF8237F6),
-      500: const Color(0xFF6600E8),
-      600: const Color(0xFF5B00E2),
-      700: const Color(0xFF3D00AE),
-      800: const Color(0xFF360097),
-      900: const Color(0xFF2A0067),
+      50:  const Color(0xFFe6f0fe),
+      100: const Color(0xFFb5d3fc),
+      200: const Color(0xFF84b5fa),
+      300: const Color(0xFF5398f9),
+      400: const Color(0xFF227bf7),
+      500: const Color(0xFF0861dd),
+      600: const Color(0xFF064cac),
+      700: const Color(0xFF064cac),
+      800: const Color(0xFF03204a),
+      900: const Color(0xFF010b19),
     },
   );
-}
 
-class ThemeColors {
-  static const _blackPrimaryValue = 0xFF000000;
-  static const primaryButtonBackgroundColor = 0xFFBD83F8;
-  static const MaterialColor purple = const MaterialColor(
-    _blackPrimaryValue,
-    const <int, Color>{
-      50:  const Color(0xFFF2E6FD),
-      100: const Color(0xFFDDB0FC),
-      200: const Color(primaryButtonBackgroundColor),
-      300: const Color(0xFF9B5CFA),
-      400: const Color(0xFF8237F6),
-      500: const Color(0xFF6600E8),
-      600: const Color(0xFF5B00E2),
-      700: const Color(0xFF3D00AE),
-      800: const Color(0xFF360097),
-      900: const Color(0xFF2A0067),
-    },
-  );
+  ThemeData getThemeData() {
+    return new ThemeData(
+      brightness: Brightness.dark,
+      primarySwatch: colors,
+      backgroundColor: backgroundColor,
+      scaffoldBackgroundColor: backgroundColor,
+      cardColor: cardBackgroundColor,
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+          backgroundColor: colors[200]
+      ),
+      toggleableActiveColor: colors[400],
+    );
+  }
 }

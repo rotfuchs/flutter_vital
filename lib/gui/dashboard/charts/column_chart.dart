@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:flutter_vital/gui/theme_builder.dart';
 import 'package:flutter_vital/gui/themes/dark_blue.dart';
 
 class ColumnChart extends StatefulWidget {
@@ -38,7 +39,7 @@ class ColumnChart extends StatefulWidget {
         domainFn: (OrdinalSales sales, _) => sales.year,
         measureFn: (OrdinalSales sales, _) => sales.sales,
         data: globalSalesData,
-        colorFn: (OrdinalSales sales, _) => getChartColor(DarkBlueThemeColors.purple[300]),
+        colorFn: (OrdinalSales sales, _) => getChartColor(AppTheme.getCurrentAppTheme().getColor(300)),
       ),
     ];
   }

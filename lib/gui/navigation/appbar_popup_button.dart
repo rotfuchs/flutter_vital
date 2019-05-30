@@ -11,6 +11,14 @@ class AppbarPopupButton extends StatelessWidget {
         case 'edit_list':
           Navigator.pushNamed(context, '/list');
           break;
+
+        case 'settings':
+          Navigator.pushNamed(context, '/settings');
+          break;
+
+        case 'about':
+          Navigator.pushNamed(context, '/about');
+          break;
       }
     }
 
