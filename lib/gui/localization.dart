@@ -30,6 +30,10 @@ class GuiLocalizations {
       'dark_red_name': 'Dark red theme',
       'bright_blue_name': 'Bright blue theme',
       'switch_theme': 'Switch theme',
+      'developer': 'Developer',
+      'license': 'License',
+      'source_code': 'Source Code',
+      'contact': 'Contact'
     },
     'de': {
       'title': 'Hola Mundo',
@@ -50,6 +54,10 @@ class GuiLocalizations {
       'dark_red_name': 'schwarz/rot',
       'bright_blue_name': 'weiß/blau',
       'switch_theme': 'Theme wechseln',
+      'developer': 'Entwickler',
+      'license': 'Lizenz',
+      'source_code': 'Quellcode',
+      'contact': 'Kontakt'
     },
   };
 

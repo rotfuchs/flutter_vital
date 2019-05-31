@@ -25,6 +25,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   charts_flutter: ^0.6.0
   shared_preferences: ^0.5.0
+  url_launcher: ^5.0.2
   dynamic_theme: ^1.0.1
   sqflite: any
   path: any
@@ -46,11 +47,11 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  assets:
+    - assets/images/fox_image.png
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #  - images/a_dot_burr.jpeg
-  #  - images/a_dot_ham.jpeg
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
