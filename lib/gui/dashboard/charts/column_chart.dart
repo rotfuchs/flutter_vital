@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter_vital/gui/theme_builder.dart';
-import 'package:flutter_vital/gui/themes/dark_blue.dart';
 
 class ColumnChart extends StatefulWidget {
   final List<charts.Series> seriesList;
@@ -32,6 +31,8 @@ class ColumnChart extends StatefulWidget {
 //      new OrdinalSales('2016', 4500),
 //      new OrdinalSales('2017', 4300),
     ];
+
+    print(AppTheme.getCurrentAppTheme().getColor(300));
 
     return [
       new charts.Series<OrdinalSales, String>(

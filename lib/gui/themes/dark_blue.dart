@@ -8,7 +8,7 @@ class DarkBlueTheme extends AppTheme {
   static const cardBackgroundColor = const Color(0xFF313131);
   static const snackBarBackgroundColor = Colors.green;
 
-  static const MaterialColor colors = const MaterialColor(
+  MaterialColor colors = MaterialColor(
     blackPrimaryValue,
     const <int, Color>{
       50:  const Color(0xFFe6f0fe),

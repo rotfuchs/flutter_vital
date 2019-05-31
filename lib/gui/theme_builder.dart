@@ -82,13 +82,13 @@ abstract class AppTheme {
   static const cardBackgroundColor = const Color(0xFF313131);
   static const snackBarBackgroundColor = Colors.green;
 
-  static const MaterialColor colors = const MaterialColor(
+  MaterialColor colors = MaterialColor(
     blackPrimaryValue,
     const <int, Color>{
       50:  const Color(0xFFF2E6FD),
       100: const Color(0xFFDDB0FC),
       200: const Color(0xFFBD83F8),
-      300: const Color(0xFF9B5CFA),
+      300: const Color(0xFF8f8f8f),
       400: const Color(0xFF8237F6),
       500: const Color(0xFF6600E8),
       600: const Color(0xFF5B00E2),
