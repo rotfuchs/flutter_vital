@@ -19,11 +19,12 @@ class NumericFormTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextStyle valueStyle = Theme.of(context).textTheme.title;
 
     return TextFormField(
       controller: controller,
       keyboardType: TextInputType.number,
-      style: TextStyle(fontSize: 20),
+      style: valueStyle,
       decoration: InputDecoration(
         labelText: labelText,
         suffixText: suffixText,

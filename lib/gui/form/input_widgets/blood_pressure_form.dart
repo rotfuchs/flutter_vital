@@ -35,10 +35,10 @@ class BloodPressureFormState extends State<BloodPressureForm> {
         children: <Widget>[
 
           Padding(
-            padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
+            padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
             child: Text(
               GuiLocalizations.of(context).trans('blood_pressure_values'),
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(fontSize: 15),
             ),
           ),
 
@@ -47,10 +47,11 @@ class BloodPressureFormState extends State<BloodPressureForm> {
           diaTextField(),
           pulseTextField(),
 
+
+
           Container(
-              alignment: Alignment.centerRight,
-              padding: EdgeInsets.fromLTRB(0, 25, 0, 0),
-              child: saveButton(context)
+              padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+              child: Row(children: <Widget>[Expanded(child: saveButton(context),)],),
           )
         ],
       )

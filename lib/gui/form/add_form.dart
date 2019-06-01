@@ -22,7 +22,7 @@ class AddFormState extends State<AddForm> {
           ],
         ),
         body: ListView(
-          padding: EdgeInsets.fromLTRB(20, 25, 20, 0),
+          padding: EdgeInsets.fromLTRB(20, 15, 20, 0),
           children: <Widget>[
             BloodPressureForm()
           ]
