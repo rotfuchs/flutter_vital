@@ -3,6 +3,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vital/gui/localization.dart';
+import 'package:flutter_vital/gui/settings/widgets/blood_pressure_values.dart';
 import 'package:flutter_vital/gui/settings/widgets/theme_switcher.dart';
 
 class Settings extends StatelessWidget {
@@ -11,9 +12,9 @@ class Settings extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(GuiLocalizations.of(context).trans('settings')),
-          actions: <Widget>[
-          ],
+          title: Text(
+            GuiLocalizations.of(context).trans('settings'),
+          ),
         ),
         body: ListView(
             padding: EdgeInsets.fromLTRB(20, 25, 20, 0),
@@ -21,8 +22,8 @@ class Settings extends StatelessWidget {
               Column(
                 children: <Widget>[
                   ThemeSwitcherOption(),
-//                  Divider(),
-//                  NotifierOption(),
+                  Divider(),
+                  BloodPressureValuesOption(),
                 ],
               )
             ]
