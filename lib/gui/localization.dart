@@ -33,7 +33,11 @@ class GuiLocalizations {
       'developer': 'Developer',
       'license': 'License',
       'source_code': 'Source Code',
-      'contact': 'Contact'
+      'contact': 'Contact',
+      'range_values': 'Range values',
+      'diastolic': 'Diastolic',
+      'systolic': 'Systolic',
+      'pulse': 'Pulse'
     },
     'de': {
       'title': 'Hola Mundo',
@@ -57,7 +61,11 @@ class GuiLocalizations {
       'developer': 'Entwickler',
       'license': 'Lizenz',
       'source_code': 'Quellcode',
-      'contact': 'Kontakt'
+      'contact': 'Kontakt',
+      'range_values': 'Wertbereiche',
+      'diastolic': 'Diastolisch',
+      'systolic': 'Systolisch',
+      'pulse': 'Puls'
     },
   };
 
