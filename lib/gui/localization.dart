@@ -37,7 +37,8 @@ class GuiLocalizations {
       'range_values': 'Range values',
       'diastolic': 'Diastolic',
       'systolic': 'Systolic',
-      'pulse': 'Pulse'
+      'pulse': 'Pulse',
+      'reset_range_values': 'Reset range values'
     },
     'de': {
       'title': 'Hola Mundo',
@@ -65,7 +66,8 @@ class GuiLocalizations {
       'range_values': 'Wertbereiche',
       'diastolic': 'Diastolisch',
       'systolic': 'Systolisch',
-      'pulse': 'Puls'
+      'pulse': 'Puls',
+      'reset_range_values': 'Wertebereiche zurücksetzen'
     },
   };
 
