@@ -39,7 +39,10 @@ class GuiLocalizations {
       'systolic': 'Systolic',
       'pulse': 'Pulse',
       'reset_range_values': 'Reset range values',
-      'no_data_available': 'No data available'
+      'no_data_available': 'No data available',
+      'average_value': 'average value',
+      'ascending_trend': 'ascending trend',
+      'descending_trend': 'descending trend'
     },
     'de': {
       'title': 'Hola Mundo',
@@ -69,7 +72,10 @@ class GuiLocalizations {
       'systolic': 'Systolisch',
       'pulse': 'Puls',
       'reset_range_values': 'Wertebereiche zurücksetzen',
-      'no_data_available': 'Keine Werte verfügbar'
+      'no_data_available': 'Keine Werte verfügbar',
+      'average_value': 'Durchschnittswert',
+      'ascending_trend': 'Tendenz steigend',
+      'descending_trend': 'Tendenz fallend'
     },
   };
 
