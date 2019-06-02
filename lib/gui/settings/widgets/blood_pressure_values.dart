@@ -21,8 +21,6 @@ class BloodPressureValuesOptionState extends State<BloodPressureValuesOption> {
 
   @override
   Widget build(BuildContext context) {
-    this._loadCurrentValues();
-
     return Column(
       children: <Widget>[
         Row(
@@ -31,50 +29,96 @@ class BloodPressureValuesOptionState extends State<BloodPressureValuesOption> {
               padding: new EdgeInsets.fromLTRB(0, 0, 5, 0),
               child: Icon(Icons.add_circle),
             ),
-            Expanded(child: Text(GuiLocalizations.of(context).trans("range_values")),)
+            Expanded(child: Text(GuiLocalizations.of(context).trans("range_values")),),
+
           ],
         ),
 
         RangeSliderOption(
-            diaValue.min,
-            diaValue.max,
-            GuiLocalizations.of(context).trans("diastolic")
+          values: [sysValue.min, sysValue.max],
+          min: 0,
+          max: 300,
+          labelText: GuiLocalizations.of(context).trans("systolic"),
+          onDragCompleted: (int handlerIndex, double lowerValue, double upperValue) {
+            _saveOption('sys', lowerValue, upperValue);
+            sysValue.min = lowerValue;
+            sysValue.max = upperValue;
+          },
         ),
 
         RangeSliderOption(
-            sysValue.min,
-            sysValue.max,
-            GuiLocalizations.of(context).trans("systolic")
+          values: [diaValue.min, diaValue.max],
+          min: 0,
+          max: 200,
+          labelText: GuiLocalizations.of(context).trans("diastolic"),
+          onDragCompleted: (int handlerIndex, double lowerValue, double upperValue) {
+            _saveOption('dia', lowerValue, upperValue);
+            diaValue.min = lowerValue;
+            diaValue.max = upperValue;
+          },
         ),
 
         RangeSliderOption(
-            puleValue.min,
-            puleValue.max,
-            GuiLocalizations.of(context).trans("pulse")
-        )
+          values: [puleValue.min, puleValue.max],
+          min: 0,
+          max: 200,
+          labelText: GuiLocalizations.of(context).trans("pulse"),
+          onDragCompleted: (int handlerIndex, double lowerValue, double upperValue) {
+            _saveOption('pulse', lowerValue, upperValue);
+            puleValue.min = lowerValue;
+            puleValue.max = upperValue;
+          },
+        ),
+
+//        Row(
+//          mainAxisAlignment: MainAxisAlignment.end,
+//          children: <Widget>[
+//            Padding(
+//              padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
+//              child: RaisedButton(
+//                onPressed: () {},
+//                child: Text(GuiLocalizations.of(context).trans('reset_range_values')),
+//              ),
+//            ),
+//          ],
+//        ),
+
       ],
     );
   }
 
-//  @override
-//  void initState() {
-//
-//    super.initState();
-//  }
-
-
+  @override
+  void initState() {
+    _loadCurrentValues();
+    super.initState();
+  }
 
   void _loadCurrentValues() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
 
-//    setState(() {
-//      _currentTheme = theme;
-//    });
+    var sysValues = prefs.getStringList('sys');
+    if(sysValues != null && sysValues.length == 2) {
+      sysValue.min = double.parse(sysValues[0]);
+      sysValue.max = double.parse(sysValues[1]);
+    }
+
+    var diaValues = prefs.getStringList('dia');
+    if(diaValues != null && diaValues.length == 2) {
+      sysValue.min = double.parse(diaValues[0]);
+      sysValue.max = double.parse(diaValues[1]);
+    }
+
+    var pulseValues = prefs.getStringList('pulse');
+    if(pulseValues != null && pulseValues.length == 2) {
+      puleValue.min = double.parse(pulseValues[0]);
+      puleValue.max = double.parse(pulseValues[1]);
+    }
+    setState(() {});
   }
 
-  void _saveOption(String key, int value) async {
+  void _saveOption(String key, double minValue, double maxValue) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setInt(key, value);
+    prefs.setStringList(key, [minValue.toString(), maxValue.toString()]);
   }
 }
 

@@ -122,7 +122,6 @@ class BloodPressureFormState extends State<BloodPressureForm> {
           var bloodPressureCommandService = new BloodPressureCommandService();
 
           bloodPressureCommandService.save(_bp).then((success) {
-            print( _bp.toMap() );
             showSnackBar(context, success);
             clear();
           });

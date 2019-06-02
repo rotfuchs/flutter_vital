@@ -4,31 +4,36 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_xlider/flutter_xlider.dart';
 
 class RangeSliderOption extends StatefulWidget {
-  final double _minValue;
-  final double _maxValue;
-  final String _labelText;
+  final double min;
+  final double max;
+  final List<double> values;
+  final String labelText;
+  final Function(int handlerIndex, double lowerValue, double upperValue) onDragging;
+  final Function(int handlerIndex, double lowerValue, double upperValue) onDragCompleted;
 
-  RangeSliderOption(
-      this._minValue,
-      this._maxValue,
-      this._labelText,
-  );
+  RangeSliderOption({
+    this.min,
+    this.max,
+    @required this.values,
+    @required this.labelText,
+    this.onDragging,
+    this.onDragCompleted,
+  });
 
   @override
   RangeSliderOptionState createState() {
-    return RangeSliderOptionState(this._minValue, this._maxValue, this._labelText);
+    return RangeSliderOptionState(labelText);
   }
 }
 
 class RangeSliderOptionState extends State<RangeSliderOption> {
-  double _minValue;
-  double _maxValue;
   String _labelText;
 
-  RangeSliderOptionState(this._minValue, this._maxValue, this._labelText);
+  RangeSliderOptionState(this._labelText);
 
   @override
   Widget build(BuildContext context) {
+
     return Column(
       children: <Widget>[
         Container(
@@ -37,17 +42,17 @@ class RangeSliderOptionState extends State<RangeSliderOption> {
             textDirection: TextDirection.rtl,
             children: <Widget>[
               Container(
-                width: 40,
+                width: 30,
                 alignment: Alignment(1, 0),
-                child: Text(_maxValue.toString()),
+                child: Text(widget.values[1].toStringAsFixed(0)),
               ),
               Text('Max:', style: TextStyle(fontWeight: FontWeight.bold),),
 
               Container(
-                width: 50,
+                width: 40,
                 alignment: Alignment(1, 0),
                 padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
-                child: Text(_minValue.toString()),
+                child: Text(widget.values[0].toStringAsFixed(0)),
               ),
               Text('Min:', style: TextStyle(fontWeight: FontWeight.bold),),
 
@@ -59,20 +64,24 @@ class RangeSliderOptionState extends State<RangeSliderOption> {
         ),
         Container(
           child: FlutterSlider(
-            values: [_minValue, _maxValue],
+            values: widget.values,
             rangeSlider: true,
-            max: 500,
-            min: 0,
+            max: widget.max,
+            min: widget.min,
             trackBar: FlutterSliderTrackBar(
                 inactiveTrackBarColor: Colors.grey
             ),
             tooltip: FlutterSliderTooltip(
               disabled: true,
             ),
+            onDragCompleted: widget.onDragCompleted,
             onDragging: (handlerIndex, lowerValue, upperValue) {
-              _minValue = lowerValue;
-              _maxValue = upperValue;
+              widget.values[0] = lowerValue;
+              widget.values[1] = upperValue;
               setState(() {});
+
+              if(widget.onDragging != null)
+                widget.onDragging(handlerIndex, lowerValue, upperValue);
             },
           )
         ),
