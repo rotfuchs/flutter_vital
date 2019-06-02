@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_vital/gui/dashboard/charts/column_chart.dart';
 import 'package:flutter_vital/gui/dashboard/widgets/dia_dashboard_card.dart';
 import 'package:flutter_vital/gui/dashboard/widgets/pulse_dashboard_card.dart';
 import 'package:flutter_vital/gui/dashboard/widgets/sys_dashboard_card.dart';

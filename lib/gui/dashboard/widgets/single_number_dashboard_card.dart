@@ -73,11 +73,9 @@ class SingleNumberDashboardCard extends StatelessWidget {
     if(ratioNumber==0)
       return "N/A";
 
-    return (ratioNumber.toStringAsFixed(0) != ratioNumber.toString())
-        ? ratioNumber.toString() : ratioNumber.toStringAsFixed(0);
+    return (ratioNumber.toStringAsFixed(1) != ratioNumber.toString())
+        ? ratioNumber.toStringAsFixed(1) : ratioNumber.toStringAsFixed(0);
   }
-
-
 
   bool hasErrors() {
     return (ratioNumber<0);
