@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_vital/gui/dashboard/charts/column_chart.dart';
-import 'package:flutter_vital/gui/dashboard/charts/line_chart.dart';
+import 'package:flutter_vital/gui/dashboard/widgets/dia_dashboard_card.dart';
+import 'package:flutter_vital/gui/dashboard/widgets/pulse_dashboard_card.dart';
+import 'package:flutter_vital/gui/dashboard/widgets/sys_dashboard_card.dart';
 import 'package:flutter_vital/gui/localization.dart';
 import 'package:flutter_vital/gui/navigation/appbar_popup_button.dart';
 
 class Dashboard extends StatefulWidget {
+  final DateTime startDate = DateTime.now().subtract(Duration(days: 7));
+  final DateTime endDate = DateTime.now();
+
   @override
   DashboardState createState() => DashboardState();
 }
@@ -38,16 +43,24 @@ class DashboardState extends State<Dashboard> {
                 Expanded(
                   child: Column(
                     children: <Widget>[
-                      Card(
-                        child: new Padding(
-                          padding: new EdgeInsets.all(32.0),
-                          child: new SizedBox(
-                            height: 100.0,
-                            child: ColumnChart.withSampleData(),
-                          ),
-                        )
+                      SysAverageDashboardCard(
+                        startDate: widget.startDate,
+                        endDate: widget.endDate,
                       ),
-                      DashboardRatioCard('Puls', 55.5, 'Bla bla bla bla'),
+                      PulseAverageDashboardCard(
+                        startDate: widget.startDate,
+                        endDate: widget.endDate,
+                      ),
+
+//                      Card(
+//                        child: new Padding(
+//                          padding: new EdgeInsets.all(32.0),
+//                          child: new SizedBox(
+//                            height: 100.0,
+//                            child: ColumnChart.withSampleData(),
+//                          ),
+//                        )
+//                      ),
 
 //                      Card(
 //                        child: new Padding(
@@ -66,7 +79,10 @@ class DashboardState extends State<Dashboard> {
                 Expanded(
                   child: Column(
                     children: <Widget>[
-                      DashboardRatioCard('Sys', 132, 'Bla bla bla bla'),
+                      DiaAverageDashboardCard(
+                        startDate: widget.startDate,
+                        endDate: widget.endDate,
+                      ),
 //                        Card(
 //                          elevation: 1,
 //                          child: Container(
@@ -168,8 +184,8 @@ class DashboardCard extends StatelessWidget {
         child: new Padding(
           padding: new EdgeInsets.all(2),
           child: new SizedBox(
-            height: 100.0,
-            child: childWidget
+              height: 100.0,
+              child: childWidget
           ),
         )
     );
