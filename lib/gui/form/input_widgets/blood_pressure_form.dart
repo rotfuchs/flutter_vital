@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_vital/core/Service/BloodPressure/Command/BloodPressureCommandService.dart';
 import 'package:flutter_vital/core/Service/BloodPressure/Model/BloodPressure.dart';
+import 'package:flutter_vital/gui/action_notifier.dart';
 import 'package:flutter_vital/gui/form/input_widgets/date_time_picker.dart';
 import 'package:flutter_vital/gui/form/input_widgets/form_text_field.dart';
 import 'package:flutter_vital/gui/localization.dart';
@@ -124,6 +125,9 @@ class BloodPressureFormState extends State<BloodPressureForm> {
           bloodPressureCommandService.save(_bp).then((success) {
             showSnackBar(context, success);
             clear();
+
+            if(success)
+              ActionNotifier.setAction("item_saved");
           });
         }
       },

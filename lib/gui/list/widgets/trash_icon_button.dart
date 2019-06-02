@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_vital/core/Service/BloodPressure/Command/BloodPressureCommandService.dart';
 import 'package:flutter_vital/core/Service/BloodPressure/Model/BloodPressure.dart';
+import 'package:flutter_vital/gui/action_notifier.dart';
 import 'package:flutter_vital/gui/localization.dart';
 import 'package:flutter_vital/gui/theme_builder.dart';
 
@@ -28,6 +29,7 @@ class TrashIcon extends StatelessWidget {
               _bloodPressureCommandService.deleteList(_selectedItems).then((bool success) {
                 showSnackBar(context, true);
                 _notifier.value = "items_deleted";
+                ActionNotifier.setAction("item_deleted");
               });
             }
           );
