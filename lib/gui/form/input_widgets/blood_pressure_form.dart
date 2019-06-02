@@ -8,6 +8,7 @@ import 'package:flutter_vital/gui/form/input_widgets/date_time_picker.dart';
 import 'package:flutter_vital/gui/form/input_widgets/form_text_field.dart';
 import 'package:flutter_vital/gui/localization.dart';
 import 'package:flutter_vital/gui/theme_builder.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class BloodPressureForm extends StatefulWidget {
   @override
@@ -23,6 +24,15 @@ class BloodPressureFormState extends State<BloodPressureForm> {
   TextEditingController diaTextController = new TextEditingController();
   TextEditingController sysTextController = new TextEditingController();
   TextEditingController pulseTextController = new TextEditingController();
+
+  double sysMinValue = 45;
+  double sysMaxValue = 230;
+
+  double diaMinValue = 35;
+  double diaMaxValue = 160;
+
+  double pulseMinValue = 30;
+  double pulseMaxValue = 160;
 
   @override
   Widget build(BuildContext context) {
@@ -47,8 +57,6 @@ class BloodPressureFormState extends State<BloodPressureForm> {
           sysTextField(),
           diaTextField(),
           pulseTextField(),
-
-
 
           Container(
               padding: EdgeInsets.fromLTRB(0, 10, 0, 0),
@@ -85,6 +93,8 @@ class BloodPressureFormState extends State<BloodPressureForm> {
     return NumericFormTextField(
       labelText: "Dia",
       suffixText: "mmHg",
+      minValue: this.diaMinValue,
+      maxValue: this.diaMaxValue,
       onSaved: (String value) {
         _bp.diastolic = double.parse(value);
       },
@@ -96,6 +106,8 @@ class BloodPressureFormState extends State<BloodPressureForm> {
     return NumericFormTextField(
       labelText: "Sys",
       suffixText: "mmHg",
+      minValue: this.sysMinValue,
+      maxValue: this.sysMaxValue,
       onSaved: (String value) {
         _bp.systolic = double.parse(value);
       },
@@ -107,6 +119,8 @@ class BloodPressureFormState extends State<BloodPressureForm> {
     return NumericFormTextField(
       labelText: "Puls",
       suffixText: "min",
+      minValue: this.pulseMinValue,
+      maxValue: this.pulseMaxValue,
       onSaved: (String value) {
         _bp.pulse = double.parse(value);
       },
@@ -147,6 +161,12 @@ class BloodPressureFormState extends State<BloodPressureForm> {
     _bp.created.add(new Duration(hours: _fromTime.hour, minutes: _fromTime.minute, seconds: 0));
   }
 
+  @override
+  void initState() {
+    super.initState();
+    _loadValueRanges();
+  }
+
   void showSnackBar(BuildContext context, bool success) {
     String snackBarText;
 
@@ -169,5 +189,37 @@ class BloodPressureFormState extends State<BloodPressureForm> {
               ))
           );
     }
+  }
+
+  void _loadValueRanges() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var valuesChanged = false;
+
+    var sysValues = prefs.getStringList('sys');
+    if(sysValues != null && sysValues.length == 2) {
+      sysMinValue = double.parse(sysValues[0]);
+      sysMaxValue = double.parse(sysValues[1]);
+
+      valuesChanged = true;
+    }
+
+    var diaValues = prefs.getStringList('dia');
+    if(diaValues != null && diaValues.length == 2) {
+      diaMinValue = double.parse(diaValues[0]);
+      diaMaxValue = double.parse(diaValues[1]);
+
+      valuesChanged = true;
+    }
+
+    var pulseValues = prefs.getStringList('pulse');
+    if(pulseValues != null && pulseValues.length == 2) {
+      pulseMinValue = double.parse(pulseValues[0]);
+      pulseMaxValue = double.parse(pulseValues[1]);
+
+      valuesChanged = true;
+    }
+
+    if(valuesChanged)
+      setState(() { print('test'); });
   }
 }
