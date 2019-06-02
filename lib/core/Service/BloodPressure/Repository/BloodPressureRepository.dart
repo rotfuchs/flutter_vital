@@ -50,17 +50,17 @@ class BloodPressureRepository {
 
     if(filter.createdDateStart != null) {
       whereCons.add('created >= ?');
-      whereArgs.add(filter.createdDateStart.toString());
+      whereArgs.add(filter.createdDateStart.toIso8601String());
     }
     if(filter.createdDateEnd != null) {
       whereCons.add('created <= ?');
-      whereArgs.add(filter.createdDateEnd.toString());
+      whereArgs.add(filter.createdDateEnd.toIso8601String());
     }
 
     final List<Map<String, dynamic>> items = await db.query(
         "blood_pressure_data",
-        where: whereCons.join(' AND '),
-        whereArgs: whereArgs,
+        where: (whereCons.length>0) ? whereCons.join(' AND ') : null,
+        whereArgs: (whereArgs.length>0) ? whereArgs: null,
         orderBy: filter.orderBy,
         limit: filter.limit,
         offset: filter.offset
