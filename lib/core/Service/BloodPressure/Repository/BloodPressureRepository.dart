@@ -56,8 +56,6 @@ class BloodPressureRepository {
     return List.generate(items.length, (i) {
       var item = new BloodPressure();
 
-      print( items[i] );
-
       item.id = items[i]['id'];
       item.created = DateTime.parse(items[i]['created']);
       item.pulse = (items[i]['pulse']!=null) ? items[i]['pulse'].toDouble() : 0;

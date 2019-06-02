@@ -48,8 +48,6 @@ class ThemeBuilderState extends State<ThemeBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    print(_currentTheme);
-
     if(_currentTheme == null)
       _currentTheme = AppTheme.getCurrentAppTheme();
 

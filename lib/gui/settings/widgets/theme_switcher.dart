@@ -44,7 +44,6 @@ class ThemeSwitcherOptionState extends State<ThemeSwitcherOption> {
   }
 
   Widget _getDropdownButton(BuildContext context) {
-    print(_currentTheme);
     return new DropdownButton(
       value: _currentTheme,
       items: _buildDropDownOptionList(context),

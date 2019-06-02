@@ -32,8 +32,6 @@ class ColumnChart extends StatefulWidget {
 //      new OrdinalSales('2017', 4300),
     ];
 
-    print(AppTheme.getCurrentAppTheme().getColor(300));
-
     return [
       new charts.Series<OrdinalSales, String>(
         id: 'Global Revenue',
