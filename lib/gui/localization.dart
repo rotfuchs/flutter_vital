@@ -42,7 +42,8 @@ class GuiLocalizations {
       'no_data_available': 'No data available',
       'average_value': 'average value',
       'ascending_trend': 'ascending trend',
-      'descending_trend': 'descending trend'
+      'descending_trend': 'descending trend',
+      'number_is_out_of_range': 'Number is out of range'
     },
     'de': {
       'title': 'Hola Mundo',
@@ -75,7 +76,8 @@ class GuiLocalizations {
       'no_data_available': 'Keine Werte verfügbar',
       'average_value': 'Durchschnittswert',
       'ascending_trend': 'Tendenz steigend',
-      'descending_trend': 'Tendenz fallend'
+      'descending_trend': 'Tendenz fallend',
+      'number_is_out_of_range': 'Die Zahl liegt nicht im Wertebereich'
     },
   };
 
