@@ -45,9 +45,22 @@ class BloodPressureRepository {
 
   Future<List<BloodPressure>> filter(BloodPressureFilter filter) async {
     final db = await _getDb();
+    List<String> whereCons = [];
+    List<String> whereArgs = [];
+
+    if(filter.createdDateStart != null) {
+      whereCons.add('created >= ?');
+      whereArgs.add(filter.createdDateStart.toString());
+    }
+    if(filter.createdDateEnd != null) {
+      whereCons.add('created <= ?');
+      whereArgs.add(filter.createdDateEnd.toString());
+    }
 
     final List<Map<String, dynamic>> items = await db.query(
         "blood_pressure_data",
+        where: whereCons.join(' AND '),
+        whereArgs: whereArgs,
         orderBy: filter.orderBy,
         limit: filter.limit,
         offset: filter.offset
